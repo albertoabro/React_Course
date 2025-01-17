@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Vite React - Use Vite + React like a Pro!</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.jsx"></script>
+    <script type="module">
+
+      const active = true;
+
+      const message = (active) ? 'Active' : 'Inactive';
+
+      console.log(message);
+
+      const message2 = active && 'Active';
+
+      console.log(message2);
+
+    </script>
+  </body>
+</html>

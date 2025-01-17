@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Charge React-->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> <!--Translate JSX to JS for navigators-->
+
+    <title>ReactApp</title>
+</head>
+<body>
+    
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const divRoot = document.querySelector('#root');
+        const name = 'Alberto'
+        const hiTag=<h1>Hello, I´m {name}</h1>;
+        
+        ReactDOM.render(hiTag,divRoot);
+
+    </script>
+</body>
+</html>
