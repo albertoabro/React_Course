@@ -6,7 +6,7 @@ import { FirebaseAuth } from "../firebase/config";
 
 export const useCheckAuth = () => {
 
-    const { status } = useSelector(state => state.auth);
+    const { status, uid } = useSelector(state => state.auth);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,6 +20,7 @@ export const useCheckAuth = () => {
     }, []);
 
     return {
-        status
+        status,
+        uid
     }
 }
