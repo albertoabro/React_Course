@@ -9,6 +9,7 @@ export const loadUserNotes = ( dispatch ) =>{
 export const loadNotes = async(uid) => {
 
     const collectionRef = collection(FirebaseBD, `${ uid }/journal/notes`);
+
     const docs = await getDocs( collectionRef );
 
     const notes = [];

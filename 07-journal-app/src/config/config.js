@@ -5,5 +5,6 @@ export const configEnvFirebase = {
     firebaseProjectID: import.meta.env.VITE_FIREBASE_PROJECTID,
     firebaseStorageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
     firebaseMessagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
-    firebaseApiId: import.meta.env.VITE_FIREBASE_APIID
+    firebaseApiId: import.meta.env.VITE_FIREBASE_APIID,
+
 };

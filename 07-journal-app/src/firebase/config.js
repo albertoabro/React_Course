@@ -7,7 +7,6 @@ import { configEnvFirebase } from "../config/config";
 
 // Your web app's Firebase configuration
 
-
 const firebaseConfig = {
   
   apiKey: configEnvFirebase.firebaseApyKey,

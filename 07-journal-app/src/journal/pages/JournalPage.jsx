@@ -15,7 +15,7 @@ export const JournalPage = () => {
 
 
   const onClickNewNote = () => {
-    dispatch( startNewNote () );0
+    dispatch( startNewNote () );
   }
 
     return (
