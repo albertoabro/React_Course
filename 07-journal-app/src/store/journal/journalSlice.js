@@ -19,13 +19,16 @@ const initialState = {
 
 const actionMap = {
     addNewNote: (state, {payload}) => {
-        state.notes = payload;
+        state.notes.push( payload );
         state.isSaving = false;
         state.messageSaved='';
     },
 
     removeNote: (state, {payload}) => {
-        state.notes = state.notes.filter( item => item.id !== payload.id)
+
+        console.log(payload.id)
+        state.notes = state.notes.filter( item => item.id !== payload.id);
+        state.active = null;
     },
 
     updateNote: (state, {payload}) => {
@@ -62,6 +65,18 @@ const actionMap = {
         state.isSaving = true
     },
 
+    setPhotosToActiveNote: (state, {payload}) => {
+        state.active.imageUrls = [...state.active.imageUrls, ...payload];
+        state.isSaving = false;
+    },
+
+    setClearNoteLogout: ( state ) => {
+        state.isSaving = false;
+        state.messageSaved = "";
+        state.notes = [];
+        state.active = null;
+    },
+
     setError: (state, {payload}) => {
         state.error = payload
     },
@@ -84,4 +99,6 @@ export const {
     setActiveNote, 
     setNote,
     setSaving,
+    setPhotosToActiveNote,
+    setClearNoteLogout,
     setError } = journalSlice.actions;
