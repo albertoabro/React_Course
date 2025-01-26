@@ -26,7 +26,6 @@ const actionMap = {
 
     removeNote: (state, {payload}) => {
 
-        console.log(payload.id)
         state.notes = state.notes.filter( item => item.id !== payload.id);
         state.active = null;
     },
@@ -42,14 +41,6 @@ const actionMap = {
         });
 
         state.messageSaved = `${payload.title}, successfully updated`;
-    },
-
-    toggleNote: (state, {payload}) => {
-        state.notes = state.notes.map( item => 
-            item.id === payload.id
-                ? {...item,  [payload.field]: !item [payload.field] } 
-                : item
-        )
     },
 
     setActiveNote: (state, {payload}) => {
@@ -95,7 +86,6 @@ export const {
     addNewNote, 
     removeNote, 
     updateNote, 
-    toggleNote, 
     setActiveNote, 
     setNote,
     setSaving,

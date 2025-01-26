@@ -2,22 +2,30 @@ import { registerUser, signInWithGoogle, signInWithCredentials, logoutFirebase }
 import { setClearNoteLogout } from "../journal/journalSlice";
 import { checkingCredentials, login, logout } from "./authSlice";
 
+export const checkingAuthentication = () => {
+    return async( dispatch ) => {
+
+        dispatch( checkingCredentials() );
+    }
+};
+
 export const loginWithEmailPassword = ( email, password ) => {
 
     return async ( dispatch ) => {
         
         dispatch( checkingCredentials() );
 
-        const { ok, uid, photoURL, displayName, errorMessage } = await signInWithCredentials(email, password );
-        let error = errorMessage;
+        const resp = await signInWithCredentials(email, password );
+        let error = resp.errorMessage;
 
-        if( !ok ){
+        if( !resp.ok ){
             if( error === 'Firebase: Error (auth/invalid-credential).' )
                 error = 'Incorrect email or password'
             return dispatch( logout( { error } ) );
         }
 
-        dispatch( login ( { uid, displayName, email, photoURL }));
+        delete(resp.ok);
+        dispatch( login ( resp ) );
     }
 };
 
@@ -40,16 +48,19 @@ export const startGoogleSignIn = () => {
 export const startRegisteringUser = ({email, password, displayName}) => {
     return async( dispatch ) => {
         dispatch( checkingCredentials() );
-        const { ok, uid, photoURL,errorMessage } = await registerUser({email, password, displayName});
-        let error = errorMessage;
+        const resp = await registerUser({email, password, displayName});
+        let error = resp.errorMessage;
 
-        if( !ok ){
+        if( !resp.ok ){
             if (error === 'Firebase: Error (auth/email-already-in-use).')
                     error  = 'This user already exit';
 
             return dispatch( logout( { error }) );
         }
-        dispatch( login( { uid, displayName, email, photoURL } ));
+
+        delete( resp.ok );
+
+        dispatch( login( resp ));
 
     }
 }
