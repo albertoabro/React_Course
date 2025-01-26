@@ -2,19 +2,28 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore/lite";
-import { configEnvFirebase } from "../config/config";
+import { getEnvironments } from "../helpers/getEnvironments";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 
+const {
+  VITE_FIREBASE_APIKEY,
+  VITE_FIREBASE_AUTHDOMAIN,
+  VITE_FIREBASE_PROJECTID,
+  VITE_FIREBASE_STORAGEBUCKET,
+  VITE_FIREBASE_MESSAGINGSENDERID,
+  VITE_FIREBASE_APIID,
+} = getEnvironments();
+
 const firebaseConfig = {
-  
-  apiKey: configEnvFirebase.firebaseApyKey,
-  authDomain: configEnvFirebase.firebaseAuthDomain,
-  projectId: configEnvFirebase.firebaseProjectID,
-  storageBucket: configEnvFirebase.firebaseStorageBucket,
-  messagingSenderId: configEnvFirebase.firebaseMessagingSenderId,
-  appId: configEnvFirebase.firebaseApiId 
+
+  apiKey: VITE_FIREBASE_APIKEY,
+  authDomain: VITE_FIREBASE_AUTHDOMAIN,
+  projectId: VITE_FIREBASE_PROJECTID,
+  storageBucket: VITE_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: VITE_FIREBASE_MESSAGINGSENDERID,
+  appId: VITE_FIREBASE_APIID,
 };
 
 // Initialize Firebase
