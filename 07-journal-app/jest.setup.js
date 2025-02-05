@@ -9,3 +9,7 @@ dotenv.config({
 jest.mock('./src/helpers/getEnvironments', () =>({
     getEnvironments: () => ({ ...process.env })
 }));
+
+const { TextEncoder, TextDecoder } = require('util');
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
