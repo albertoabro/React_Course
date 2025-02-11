@@ -25,25 +25,32 @@ const initialState = {
 };
 
 const actionMap = {
-    addItem: (state, {payload}) => {
-        state.events = payload.events
+    addEvent: (state, {payload}) => {
+        state.events.push( payload );
+        state.activeEvent = null;
     },
 
-    removeItem: (state, {payload}) => {
-        state.events = state.events.filter( item => item.id !== {payload}.id)
+    removeEvent: (state) => {
+        if(state.activeEvent){
+        state.events = state.events.filter( event => event.id !== state.activeEvent.id);
+        state.activeEvent = null;
+        }
     },
 
-    updateItem: (state, {payload}) => {
-        state.events = state.events.map( item => 
-            item.id === payload.id ? {...item, ...payload.updates } : item
-        );
+    updateEvent: (state, {payload}) => {
+        state.events = state.events.map( event => {
+            if( event.id === payload.id )
+                return payload;
+
+            return event;
+        });
     },
 
-    toggleItem: (state, {payload}) => {
-        state.events = state.events.map( item => 
-            item.id === {payload}.id
-                ? {...item,  [payload.field]: !item [payload.field] } 
-                : item
+    toggleEvent: (state, {payload}) => {
+        state.events = state.events.map( event => 
+            event.id === {payload}.id
+                ? {...event,  [payload.field]: !event [payload.field] } 
+                : event
         )
     },
 
@@ -69,4 +76,4 @@ export const calendarSlice = createSlice({
     }, {}),
 });
 
-export const { addItem, removeItem, updateItem, toggleItem, onSetActiveEvent, setLoading, setError } = calendarSlice.actions;
+export const { addEvent, removeEvent, updateEvent, toggleEvent, onSetActiveEvent, setLoading, setError } = calendarSlice.actions;

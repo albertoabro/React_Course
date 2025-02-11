@@ -7,7 +7,7 @@ export const BtnAddNewEvent = () => {
   const { openDateModal } = useUiStore();
   const { setActiveEvent } = useCalendarStore();
 
-  const handleClickModal = (event) => {
+  const handleClickNewEvent = (event) => {
 
     setActiveEvent({
        title: '',
@@ -27,7 +27,7 @@ export const BtnAddNewEvent = () => {
   return (
     <button 
       className="btn btn-primary fab"
-      onClick={ handleClickModal }
+      onClick={ handleClickNewEvent }
     >
         <i className="fas fa-plus"></i>
     </button>

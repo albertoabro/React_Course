@@ -26,7 +26,7 @@ Modal.setAppElement('#root')
 export const CalendarModal = ( { messages, language } ) => {
 
     const { isDateModalOpen, closeDateModal } = useUiStore();
-    const { activeEvent } = useCalendarStore();
+    const { activeEvent, startSavingEvent } = useCalendarStore();
 
     const locale = getLocale(language);
 
@@ -47,12 +47,24 @@ export const CalendarModal = ( { messages, language } ) => {
         
         if(!formSubmitted) return '';
 
-        return (formValues.title.length > 0 )
+        return (formValues.title.length > 0)
                     ? ''
                     : 'is-invalid'
 
 
     }, [ formValues.title, formSubmitted ]);
+
+    const dateClass = useMemo(() => {
+        
+        if(!formSubmitted) return '';
+
+        return ( ( formValues.start.toLocaleDateString() === formValues.end.toLocaleDateString() ) && 
+                    ( ( formValues.end.getTime() - formValues.start.getTime() ) < 0 ) )
+                        ? 'is-invalid'
+                        : ''
+
+
+    }, [ formValues.end, formSubmitted ]);
 
     useEffect(() => {
         if (activeEvent) {
@@ -73,18 +85,24 @@ export const CalendarModal = ( { messages, language } ) => {
             ...formValues,
             [changing]: event
         })
-    }
+    };
 
     const onCloseModal = () => {
         closeDateModal();
-    }
+    };
 
-    const onSubmit = ( event ) => {
+    const onSubmit = async( event ) => {
         event.preventDefault();
         setFormSubmitted(true);
         
         if( formValues.title.length === 0 ) return;
-    }
+        if( ( formValues.start.toLocaleDateString() === formValues.end.toLocaleDateString() ) && 
+            ( ( formValues.end.getTime() - formValues.start.getTime() ) < 0 )  ) return;
+
+        await startSavingEvent( formValues );
+        closeDateModal();
+        setFormSubmitted(false);
+    };
 
     const formatBtnTime = ( field ) =>{
 
@@ -93,12 +111,6 @@ export const CalendarModal = ( { messages, language } ) => {
 
         return formValues[field].toLocaleTimeString().substring(0,5);
     };
-
-    const checkTimes = () => {
-        return (formValues.start && formValues.start.toDateString() === new Date().toDateString() )
-            ? new Date()
-            : new Date(new Date().setHours( 0, 0, 0, 0 ))
-    }
 
     return (
         <Modal
@@ -122,8 +134,6 @@ export const CalendarModal = ( { messages, language } ) => {
                         onChange={ (event) => { onDateChange( event, 'start' ) } }
                         dateFormat="Pp"
                         minDate={ new Date() }
-                        minTime={ checkTimes() }
-                        maxTime={ new Date().setHours( 23, 59 ) }
                         showTimeSelect
                         locale={locale}
                         timeCaption={ messages.timeWord }
@@ -138,19 +148,17 @@ export const CalendarModal = ( { messages, language } ) => {
                 <div className="form-group mb-2 d-flex flex-column">
                     <label>{messages.endDate}</label>
                     <DatePicker 
-                        className='form-control p+1'
+                        className={'form-control p+1'}
                         selected={ formValues.end }
                         onChange={ (event) => { onDateChange( event, 'end' ) } }
                         dateFormat="Pp"
-                        minDate={ formValues.start }
-                        minTime={ checkTimes() }
-                        maxTime={ new Date().setHours( 23, 59 ) }
+                        minDate={ new Date() }
                         showTimeSelect
                         locale={locale}
                         timeCaption={ messages.timeWord } 
                         customInput={
-                            <button className='example-custom-input'>
-                                { formValues.start.toLocaleDateString() + ', ' + formatBtnTime('end') }
+                            <button className={`example-custom-input form-control ${ dateClass }`}>
+                                { formValues.end.toLocaleDateString() + ', ' + formatBtnTime('end') }
                             </button>
                         }   
                     />
@@ -177,7 +185,7 @@ export const CalendarModal = ( { messages, language } ) => {
                         className="form-control"
                         placeholder={messages.note}
                         rows="5"
-                        name="notes"
+                        name="note"
                         value={ formValues.note }
                         onChange={ onInputChange }
                     ></textarea>

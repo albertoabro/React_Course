@@ -6,3 +6,9 @@ export const parseEventDates = (event) => ({
 });
 
 export const parseEventsDates = (events) => events.map(parseEventDates);
+
+export const parseDateToISOString = ( event ) => ({
+    ...event,
+    start: event.start instanceof Date ? event.start.toISOString() : event.start,
+    end: event.end instanceof Date ? event.end.toISOString() : event.end
+});

@@ -11,6 +11,7 @@ import { useLanguage } from "../../hooks/useLanguage";
 import { useUiStore } from "../../hooks/useUiStore";
 import { useCalendarStore } from "../../hooks/useCalendarStore";
 import { BtnAddNewEvent } from "../components/BtnAddNewEvent";
+import { BtnDeleteEvent } from "../components/BtnDeleteEvent";
 
 const events = [];
 
@@ -74,7 +75,7 @@ export const CalendarPage = () => {
       />
 
       <CalendarModal messages={messages} language={language}/>
-
+      <BtnDeleteEvent />
       <BtnAddNewEvent />
     </>
   )
