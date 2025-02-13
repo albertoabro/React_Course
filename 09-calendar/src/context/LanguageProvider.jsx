@@ -1,10 +1,13 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { getMessagesEN } from "../helpers/getMessagesEN";
 import { getMessagesES } from "../helpers/getMessagesES";
 import { LanguageContext } from "./LanguageContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setLanguage } from "../store/language/languageSlice";
 
 export const LanguageProvider = ( { children } ) => {
-    const [ language, setLanguage ] = useState("es");
+    const dispatch = useDispatch();
+    const language = useSelector( (state) => state.lang.language);
 
     const messages = useMemo(() => {
         switch (language) {
@@ -16,7 +19,7 @@ export const LanguageProvider = ( { children } ) => {
         }
     }, [language]);
 
-    const changeLanguage = (lang) => setLanguage(lang);
+    const changeLanguage = (lang) => dispatch( setLanguage(lang) );
 
     return (
         <LanguageContext.Provider value={{ language, changeLanguage, messages}}>

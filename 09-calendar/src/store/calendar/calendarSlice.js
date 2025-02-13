@@ -1,27 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit' 
-import { addHours } from 'date-fns';
-
-const tempEvent =   {
-
-    _id: new Date().getTime(),
-    title: 'Birthday',
-    note: 'Buy the cake',
-    start: new Date().toISOString(),
-    end: addHours( new Date(), 2 ).toISOString(),
-    bgColor: '#fafafa',
-    user: {
-        _id: '123',
-        name: 'Alberto',
-    }
-};
 
 const initialState = {
-    events: [
-        tempEvent,
-    ],
-    isLoading: false,
+    events: [],
+    isLoadingEvents: true,
     activeEvent: null,
-    error:null,
 };
 
 const actionMap = {
@@ -46,24 +28,23 @@ const actionMap = {
         });
     },
 
-    toggleEvent: (state, {payload}) => {
-        state.events = state.events.map( event => 
-            event.id === {payload}.id
-                ? {...event,  [payload.field]: !event [payload.field] } 
-                : event
-        )
-    },
-
     onSetActiveEvent: (state, {payload}) => {
         state.activeEvent = payload;
     },
 
-    setLoading: (state, {payload}) => {
-        state.isLoading = payload
+    onLoadEvents: (state, { payload = [] }) => {
+        state.isLoadingEvents = false;
+        payload.forEach( event => {
+            const exist = state.events.some( dbEvent => dbEvent.id === event.id );
+            if( !exist )
+                state.events.push( event )
+        });
     },
 
-    setError: (state, {payload}) => {
-        state.error = payload
+    onLogoutCalendar: (state) => {
+        state.events = [];
+        state.isLoadingEvents = false;
+        state.activeEvent = null;
     },
 };
 
@@ -76,4 +57,11 @@ export const calendarSlice = createSlice({
     }, {}),
 });
 
-export const { addEvent, removeEvent, updateEvent, toggleEvent, onSetActiveEvent, setLoading, setError } = calendarSlice.actions;
+export const { 
+    addEvent,
+    removeEvent,
+    updateEvent,
+    onSetActiveEvent,
+    onLoadEvents,
+    onLogoutCalendar,
+ } = calendarSlice.actions;

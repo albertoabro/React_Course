@@ -14,7 +14,7 @@ const creteUser = async(req, res = response) => {
         if( user )
             return res.status(400).json({
                 ok: false,
-                msg: 'This user already exist'
+                msg: 'USER_EXIST'
             });
 
         user = new User( req.body );
@@ -36,7 +36,7 @@ const creteUser = async(req, res = response) => {
         console.log(error)
         res.status(500).json({
             ok: false,
-            msg: 'Talk with admin'
+            msg: 'TALK_TO_ADMIN'
         })
     }
 };
@@ -51,7 +51,7 @@ const login = async(req, res = response) => {
         if( !user )
             return res.status(400).json({
                 ok: false,
-                msg: 'Wrong email or password'
+                msg: 'WRONG_EMAIL_PASSWORD'
             });
         
         const validPassword = bcrypt.compareSync( password, user.password);
@@ -59,7 +59,7 @@ const login = async(req, res = response) => {
         if( !validPassword )
             return res.status(400).json({
                 ok: false,
-                msg: 'Wrong email or password'
+                msg: 'WRONG_EMAIL_PASSWORD'
             });
 
             const token = await generateJWT(user.id, user.name);
@@ -74,7 +74,7 @@ const login = async(req, res = response) => {
         console.log(error)
         res.status(500).json({
             ok: false,
-            msg: 'Talk with admin'
+            msg: 'TALK_TO_ADMIN'
         })
     }
 };
@@ -86,6 +86,8 @@ const refreshToken = async(req, res = response) => {
     const token = await generateJWT(uid, name);
     res.json({
         ok: true,
+        uid,
+        name,
         token
     })
 };

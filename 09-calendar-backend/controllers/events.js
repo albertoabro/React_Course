@@ -20,7 +20,7 @@ const createEvent = async(req, res = response) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Talk with admin'
+            msg: 'TALK_TO_ADMIN'
         });
     }
 };
@@ -35,13 +35,13 @@ const deleteEvent = async(req, res = response) => {
         if( !event )
             res.status(404).json({
                 ok: false,
-                msg: 'Event not found' 
+                msg: 'EVENT_NOT_FOUND' 
             });
 
         if( event.user.toString() !== req.uid)
             return res.status(401).json({
                 ok: false,
-                msg: 'Access invalid'
+                msg: 'INVALID_ACCESS'
             });
 
         await Event.findByIdAndDelete(eventId);
@@ -52,7 +52,7 @@ const deleteEvent = async(req, res = response) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Talk with admin'
+            msg: 'TALK_TO_ADMIN'
         });
     }
 };
@@ -68,13 +68,13 @@ const updateEvent = async(req, res = response) => {
         if( !event )
             res.status(404).json({
                 ok: false,
-                msg: 'Event not found' 
+                msg: 'EVENT_NOT_FOUND' 
             });
 
         if( event.user.toString() !== req.uid)
             return res.status(401).json({
                 ok: false,
-                msg: 'Access invalid'
+                msg: 'INVALID_ACCESS'
             });
 
         const newEvent = {
@@ -93,7 +93,7 @@ const updateEvent = async(req, res = response) => {
         console.log(error);
         res.status(500).json({
             ok: false,
-            msg: 'Talk with admin'
+            msg: 'TALK_TO_ADMIN'
         });
     }
 };

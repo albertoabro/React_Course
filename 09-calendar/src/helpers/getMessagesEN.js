@@ -28,7 +28,22 @@ export const getMessagesEN = () => {
         descriptionEvent: 'Short description',
         note: 'Notes',
         additionalInformation: 'Additional Information',
-        saveBtn: 'Save'
-
+        saveBtn: 'Save',
+        signIn: 'Sign In',
+        signUp: 'Sign Up',
+        email: 'Email',
+        password: 'Password',
+        name: 'Name',
+        repeatPwd: 'Repeat Password',
+        signInError: 'Invalid Credentials',
+        signInErrorSwal: 'Authentication error',
+        signUpErrorSwal: 'Sign up error ',
+        signUpErrorPassword: 'Password distinct',
+        saveError: 'Error to Save',
+        deleteError: 'Error to delete',
+        EVENT_NOT_FOUND: 'Event not found',
+        INVALID_ACCESS: 'Invalid Access',
+        TALK_TO_ADMIN: 'Talk to admin',
+        WRONG_EMAIL_PASSWORD: 'Wrong email or password',
     }
 };
