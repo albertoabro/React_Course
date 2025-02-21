@@ -1,13 +1,12 @@
 
-
 .productCard {
     background-color: white;
     border-radius: 15px;
     color: black;
-    padding-bottom: 5px;
-    width: 250px;
     margin-right: 5px;
     margin-top: 5px;
+    padding-bottom: 5px;
+    width: 250px;
 }
 
 .productImg {
@@ -20,48 +19,31 @@
 }
 
 .buttonsContainer {
-    margin: 10px;
+    align-items: center;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    padding: 10px;
 }
 
-.buttonMinus {
-    cursor: pointer;
-    color: black;
+.buttonMinus, .buttonAdd, .countLabel {
+    align-items: center;
     background-color: transparent;
-    border: 1px solid black;
-    border-radius: 5px 0px 0px 5px;
-    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    flex: 0, 1, 30px; 
+    height: 30px; 
+    justify-content: center;
+    max-width: 30px;
+    padding: 1px;
     text-align: center;
-    width: auto;
-    height: auto;
+    width: 30px;
 }
 
 .buttonMinus:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.countLabel {
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    font-size: 16px;
-    height: auto;
-    padding-top: 5px;
-    text-align: center;
-    width: 30px;
-}
-
-.buttonAdd {
-    cursor: pointer;
-    color: black;
-    background-color: transparent;
-    border: 1px solid black;
-    border-radius: 0px 5px 5px 0px;
-    font-size: 16px;
-    text-align: center;
-    width: auto;
-    height: auto;
-}
 
 .buttonAdd:hover {
     background-color: rgba(0, 0, 0, 0.1);
