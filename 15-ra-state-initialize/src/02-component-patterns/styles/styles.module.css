@@ -1,0 +1,54 @@
+
+.productCard {
+    background-color: white;
+    border-radius: 15px;
+    color: black;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    width: 250px;
+}
+
+.productImg {
+    border-radius: 15px 15px 0px 0px;
+    width: 100%;
+}
+
+.productDescription {
+    margin: 10px;
+}
+
+.buttonsContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+}
+
+.buttonMinus, .buttonAdd, .countLabel {
+    align-items: center;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    flex: 0, 1, 30px; 
+    height: 30px; 
+    justify-content: center;
+    max-width: 30px;
+    padding: 1px;
+    text-align: center;
+    width: 30px;
+}
+
+.buttonMinus:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.buttonAdd:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.disabled {
+    border-color: grey !important;
+    color: grey !important;
+}
