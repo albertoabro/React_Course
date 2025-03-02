@@ -1,0 +1,75 @@
+[
+    {
+        "type": "input",
+        "name": "firstName",
+        "label": "First Name",
+        "placeholder": "First Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "require"
+            },
+            {
+                "type": "minLength",
+                "length": 2
+            }
+        ]
+    },
+    {
+        "type": "input",
+        "name": "lastName",
+        "label": "Last Name",
+        "placeholder": "Last Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "require"
+            },
+            {
+                "type": "minLength",
+                "length": 4
+            }
+        ]
+    },
+    {
+        "type": "email",
+        "name": "email",
+        "label": "Email",
+        "placeholder": "Email",
+        "value": "",
+        "validations": [
+            {
+                "type": "require"
+            },
+            {
+                "type": "email"
+            }
+        ]
+
+    },
+    {
+        "type": "select",
+        "name": "favoriteGame",
+        "label": "Favorite Game",
+        "value": "",
+        "options": [
+            {
+                "id": 1,
+                "label": "Super Mario" 
+            },
+            {
+                "id": 2,
+                "label": "Resident Evil"
+            },
+            {
+                "id": 3,
+                "label": "The Legend of Zelda"
+            }
+        ],
+        "validations": [
+            {
+                "type": "require"
+            }
+        ]
+    }
+]
