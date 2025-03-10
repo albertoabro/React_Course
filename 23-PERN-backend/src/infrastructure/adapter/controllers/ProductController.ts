@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import ProductService from "../../application/product/ProductService";
-import ProductRepository from "../../infrastructure/persistence/repository/ProductRepository";
+import ProductService from "../../../application/product/ProductService";
+import ProductRepository from "../../persistence/repository/ProductRepository";
 
 const productService = new ProductService(new ProductRepository());
 
@@ -20,6 +20,7 @@ export const getProductById = async (req: Request, res: Response) => {
 };
 
 export const createProduct = async (req: Request, res: Response) => {
+
     const product = await productService.createProduct(req.body);
     if(product)
         res.status(201).json(product);

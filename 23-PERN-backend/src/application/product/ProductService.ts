@@ -23,27 +23,36 @@ class ProductService implements ProductServiceInterface{
     };
 
     async createProduct(newProduct: Product): Promise<ProductDTO | null> {
+
+        const productSearched = await this.searchProduct(newProduct.id);
         
-        if(this.searchProduct(newProduct.id) !== null) return null; 
-        
+        if(productSearched !== null) return null; 
+    
         try {
 
-            
             const productDTO = new ProductDTO(newProduct);
-
-            await this.productRepository.createProduct(ProductDTO.toSequelizeModel(productDTO));
+            const prod = ProductDTO.toSequelizeModel(productDTO);
+            console.log('JSON: ', prod.toJSON())
+            await this.productRepository.createProduct(prod);
             return productDTO;
 
-        } catch (error) {return null;}
+        } catch (error) {
+            console.log('ERROR: ', error);
+            return null;}
     };
 
+    //TODO: Hacer la promesa a ProductDTO
     async updateProduct(product: Product): Promise<Product | null> {
 
-        if (this.searchProduct(product.id) === null ) return null;
+        const productSearched = await this.searchProduct(product.id);
+        if (productSearched=== null ) return null;
 
         try{
+            if(!product.id) throw new Error('Product id is required for update')
+
             const productDTO = new ProductDTO(product);
-            await this.productRepository.updateProduct(ProductDTO.toSequelizeModel(productDTO));
+            const prod = ProductDTO.toSequelizeModel(productDTO);
+            await this.productRepository.updateProduct(prod);
             return productDTO;
 
         } catch (error) {return null;}

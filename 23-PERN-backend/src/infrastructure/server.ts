@@ -1,9 +1,8 @@
 import * as colors from 'colors';
-import db from '../infrastructure/persistence/db';
-import productRoutes from './router/productRoutes';
+import db from './persistence/db';
+import productRoutes from './adapter/router/productRoutes';
+
 const bodyParser = require('body-parser');
-
-
 const express = require ( "express" );
 
 const connectDB = async() => {
