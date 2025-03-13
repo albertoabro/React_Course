@@ -19,3 +19,8 @@ export const OrderIdSchema = z.object({
         .refine(value => value > 0, {message: 'Parse id error'})
 });
 
+export const SearchProductSchema = z.object({
+    search: z.string()
+        .trim()
+        .min(1, {message: 'The search query is required'})
+})

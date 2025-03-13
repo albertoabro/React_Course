@@ -1,7 +1,7 @@
 "use server"
 
 import { prisma } from "@/src/lib/prisma"
-import { OrderIdSchema } from "@/src/schema/OrderSchema";
+import { OrderIdSchema } from "@/src/schema/validationSchema";
 import { revalidatePath } from "next/cache";
 
 

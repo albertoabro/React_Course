@@ -4,15 +4,9 @@ import { useStore } from "@/src/store/store"
 import { ProductDetails } from "./ProductDetails";
 import { useMemo } from "react";
 import { createOrder } from "@/actions/create-order-action";
-import { OrderSchema } from "@/src/schema/OrderSchema";
+import { OrderSchema } from "@/src/schema/validationSchema";
 import { toast } from "react-toastify";
-import { ZodIssue } from "zod";
-
-const showErrors = (errors: ZodIssue[] | undefined) => {
-    errors!.forEach((issue) => {
-                toast.error(issue.message);
-            });
-}
+import { showErrors } from "@/src/utils/showValidationErrors";
 
 export const OrderSummary = () => {
 

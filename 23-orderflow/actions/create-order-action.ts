@@ -1,7 +1,7 @@
 "use server"
 
 import { prisma } from "@/src/lib/prisma";
-import { OrderSchema } from "@/src/schema/OrderSchema"
+import { OrderSchema } from "@/src/schema/validationSchema"
 
 
 export const createOrder = async(data: unknown) => {
